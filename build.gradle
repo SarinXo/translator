@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'sarinxo.desctop'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+var springVersion = "6.2.8"
+var resilience4jVersion = "2.3.0"
+var lombockVersion = "1.18.38"
+var mapstructVersion = "1.6.3"
+
+dependencies {
+    //DI Фреймворк + Взаимодействие по HTTP 1.1 + валидация бинов
+    implementation "org.springframework:spring-core:${springVersion}"
+    implementation "org.springframework:spring-context:${springVersion}"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
+    //Отказоустойчивость запросов
+    implementation "io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}"
+
+    //Предпроцессор аннотаций (порядок компиляции сверху вниз)
+    //генерация церемониального кода
+    implementation "org.projectlombok:lombok:${lombockVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombockVersion}"
+    //генерация мапперов
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
