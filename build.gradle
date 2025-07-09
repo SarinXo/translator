@@ -19,7 +19,7 @@ repositories {
 }
 var springVersion = "6.2.8"
 var resilience4jVersion = "2.3.0"
-var lombockVersion = "1.18.38"
+var lombokVersion = "1.18.38"
 var mapstructVersion = "1.6.3"
 
 dependencies {
@@ -35,8 +35,8 @@ dependencies {
 
     //Предпроцессор аннотаций (порядок компиляции сверху вниз)
     //генерация церемониального кода
-    implementation "org.projectlombok:lombok:${lombockVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombockVersion}"
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     //генерация мапперов
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
