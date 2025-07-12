@@ -1,6 +1,8 @@
 plugins {
     id 'java'
+    id 'checkstyle'
     id 'org.springframework.boot' version '3.2.5'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -13,22 +15,45 @@ java {
     }
 }
 
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+checkstyle {
+    configFile = file("$rootDir/config/checkstyle/checkstyle.xml")
+}
+
 repositories {
     mavenCentral()
     mavenLocal()
+    maven {
+        url "https://mvnrepository.com/artifact/clojure-interop/java.awt"
+    }
 }
-var springVersion = "6.2.8"
+
 var resilience4jVersion = "2.3.0"
 var lombokVersion = "1.18.38"
 var mapstructVersion = "1.6.3"
 
 dependencies {
-    //DI Фреймворк + Взаимодействие по HTTP 1.1 + валидация бинов
-    implementation "org.springframework:spring-core:${springVersion}"
-    implementation "org.springframework:spring-context:${springVersion}"
+    //DI Фреймворк
     implementation "org.springframework.boot:spring-boot-autoconfigure"
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
+    //Реактивное взаимодействие с api по HTTP 1.1
+    implementation "org.springframework:spring-webflux"
+    implementation "io.projectreactor:reactor-core"
+    //Валидация
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+    implementation 'org.glassfish:jakarta.el:4.0.2'
+    //логи
+    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.22.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.22.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.22.0'
+    //GUI
+
+    //Захват клавишь для действий
+    implementation 'com.github.kwhat:jnativehook:2.2.2'
 
     //Отказоустойчивость запросов
     implementation "io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}"
