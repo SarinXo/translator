@@ -1,23 +1,28 @@
 package sarinxo.desctop.translator;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+import sarinxo.desctop.translator.event.ApplicationReadyEvent;
 
+@Slf4j
 @SpringBootApplication
 public class BootApp extends Application {
 
+    private static ConfigurableApplicationContext context;
+
     public static void main(String[] args) {
-        new SpringApplicationBuilder(BootApp.class)
+        context = new SpringApplicationBuilder(BootApp.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
 
+        log.info("Start to launch interface");
         launch(args);
+        log.info("Interface was successfully load");
     }
 
     /**
@@ -26,19 +31,15 @@ public class BootApp extends Application {
      * @throws Exception
      */
     @Override
-    public void start(Stage stage) throws Exception {
-        stage.setTitle("Главное окно приложения");
+    public void start(Stage stage) {
+        ApplicationReadyEvent event = new ApplicationReadyEvent(this, stage);
 
-        Button btn = new Button("Нажми меня");
-        btn.setOnAction(event -> System.out.println("Кнопка нажата!"));
+        context.publishEvent(event);
+    }
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 400, 300);
-
-        stage.setScene(scene);
-        stage.show();
+    @Override
+    public void stop() {
+        context.stop();
     }
 
 }
