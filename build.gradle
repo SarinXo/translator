@@ -33,22 +33,15 @@ repositories {
     }
 }
 
-var resilience4jVersion = "2.3.0"
-var lombokVersion = "1.18.38"
-var mapstructVersion = "1.6.3"
-var log4jVersion = "2.22.0"
-var jakartaValidationVertion = "3.0.2"
-var hibernateValidationVersion = "8.0.1.Final"
-var glassfishVersion = "4.0.2"
-
 dependencies {
     //DI Фреймворк
     implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.yaml:snakeyaml:${snakeyamlVersion}"
     //Реактивное взаимодействие с api по HTTP 1.1
     implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor:reactor-core"
     //Валидация
-    implementation "jakarta.validation:jakarta.validation-api:${jakartaValidationVertion}"
+    implementation "jakarta.validation:jakarta.validation-api:${jakartaValidationVersion}"
     implementation "org.hibernate.validator:hibernate-validator:${hibernateValidationVersion}"
     implementation "org.glassfish:jakarta.el:${glassfishVersion}"
     //логи

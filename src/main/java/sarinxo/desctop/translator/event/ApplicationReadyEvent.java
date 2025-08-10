@@ -1,8 +1,10 @@
 package sarinxo.desctop.translator.event;
 
 import javafx.stage.Stage;
+import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
+@Getter
 public class ApplicationReadyEvent extends ApplicationEvent {
 
     private final Stage stage;
@@ -12,7 +14,4 @@ public class ApplicationReadyEvent extends ApplicationEvent {
         this.stage = stage;
     }
 
-    public Stage getStage() {
-        return stage;
-    }
 }

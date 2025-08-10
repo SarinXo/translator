@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: translator
+
+translator:
+  api:
+    yandex:
+      enabled: true
+      key: ${YANDEX_TRANSLATOR_API_KEY}
