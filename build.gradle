@@ -40,6 +40,7 @@ dependencies {
     //Реактивное взаимодействие с api по HTTP 1.1
     implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor:reactor-core"
+    implementation "io.projectreactor.netty:reactor-netty-http:${nettyHttpVersion}"
     //Валидация
     implementation "jakarta.validation:jakarta.validation-api:${jakartaValidationVersion}"
     implementation "org.hibernate.validator:hibernate-validator:${hibernateValidationVersion}"
@@ -48,7 +49,10 @@ dependencies {
     implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
     implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
     implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
-    //GUI
+    //Json
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
 
     //Захват клавишь для действий
     implementation 'com.github.kwhat:jnativehook:2.2.2'

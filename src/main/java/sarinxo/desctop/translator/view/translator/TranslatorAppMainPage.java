@@ -1,5 +1,6 @@
 package sarinxo.desctop.translator.view.translator;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,8 +33,10 @@ public class TranslatorAppMainPage implements ApplicationListener<ApplicationRea
             log.error("Fail to create Translator screen!", e);
             throw new RuntimeException(e);
         }
-        log.info("Translator screen successfully load!");
     }
 
+    public void onButtonClick(ActionEvent actionEvent) {
+        System.out.printf("onButtonClick(%s)\n", actionEvent);
+    }
 
 }
