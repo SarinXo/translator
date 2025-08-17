@@ -12,19 +12,19 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 public class ValidationConfig {
 
     /**
-     * Создает Валидатор, который можно инжектировать в код
-     */
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
-    }
-
-    /**
      * Позволяет использовать аннотацию @Valid в методах и проверять корректоность сущностей
      */
     @Bean
     public static MethodValidationPostProcessor validationPostProcessor() {
         return new MethodValidationPostProcessor();
+    }
+
+    /**
+     * Создает Валидатор, который можно инжектировать в код
+     */
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
     }
 
 }

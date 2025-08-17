@@ -2,37 +2,37 @@ package sarinxo.desctop.translator.client;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
-import sarinxo.desctop.translator.dto.TranslateYandexRequest;
+import sarinxo.desctop.translator.config.property.GoogleProperties;
+import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
 import sarinxo.desctop.translator.dto.TranslateGoogleResponse;
 
 import java.util.Optional;
 
 @Slf4j
-@Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "translator.api.yandex", name = "enabled")
 public class GoogleTranslator implements GoogleApiClient {
 
-    private final WebClient yandexClient;
+    private final WebClient googleClient;
+    private final GoogleProperties googleProperties;
 
     @Override
-    public TranslateGoogleResponse translate(TranslateYandexRequest request) {
+    public TranslateGoogleResponse translate(TranslateGoogleRequest request) {
         log.trace("start translate {}", request);
         try {
-            ResponseEntity<TranslateGoogleResponse> block = yandexClient.post()
-                    .uri("/translate/v2/translate")
-                    .body(Mono.just(request), TranslateYandexRequest.class)
+            ResponseEntity<TranslateGoogleResponse> response = googleClient.post()
+                    .uri(googleProperties.api().translate())
+                    .body(BodyInserters.fromFormData("q", request.textToTranslate())
+                            .with("sl", request.from())
+                            .with("tl", request.to()))
                     .retrieve()
                     .toEntity(TranslateGoogleResponse.class)
                     .block();
 
             return Optional
-                    .ofNullable(block)
+                    .ofNullable(response)
                     .orElseThrow(() -> new RuntimeException("IDK"))
                     .getBody();
         } catch (Exception e) {

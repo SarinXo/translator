@@ -33,6 +33,12 @@ repositories {
     }
 }
 
+configurations.all {
+    resolutionStrategy.capabilitiesResolution.withCapability("com.google.collections:google-collections") {
+        select("com.google.guava:guava:33.3.1-jre")
+    }
+}
+
 dependencies {
     //DI Фреймворк
     implementation "org.springframework.boot:spring-boot-autoconfigure"

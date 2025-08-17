@@ -1,30 +1,32 @@
-package sarinxo.desctop.translator.config.client;
+package sarinxo.desctop.translator.config.google;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
+import sarinxo.desctop.translator.client.GoogleApiClient;
+import sarinxo.desctop.translator.client.GoogleTranslator;
 import sarinxo.desctop.translator.config.property.GoogleProperties;
 
 import java.time.Duration;
 
-
 @Configuration
-@RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "translator.google", name = "enabled")
-public class GoogleWebClient {
-
-    private final GoogleProperties properties;
+@ConditionalOnProperty("translator.google.enabled")
+public class GoogleConfiguration {
 
     @Bean
-    public WebClient googleClient() {
+    public GoogleApiClient googleApiClient(WebClient googleWebClient, GoogleProperties googleProperties) {
+        return new GoogleTranslator(googleWebClient, googleProperties);
+    }
+
+    @Bean
+    public WebClient googleWebClient(GoogleProperties properties) {
         HttpClient httpClient = HttpClient.create()
                 .responseTimeout(Duration.ofSeconds(5))
                 .doOnConnected(conn ->
-                        conn.addHandlerLast(new io.netty.handler.timeout.ReadTimeoutHandler(50))
+                        conn.addHandlerLast(new io.netty.handler.timeout.ReadTimeoutHandler(10))
                                 .addHandlerLast(new io.netty.handler.timeout.WriteTimeoutHandler(5))
                 );
 
