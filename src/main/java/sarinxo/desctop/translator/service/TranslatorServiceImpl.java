@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.view.translator;
+package sarinxo.desctop.translator.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import sarinxo.desctop.translator.dto.TranslateGoogleResponse;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @Slf4j

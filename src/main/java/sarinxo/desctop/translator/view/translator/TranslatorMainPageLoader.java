@@ -4,11 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import sarinxo.desctop.translator.ResizeHelper;
 import sarinxo.desctop.translator.event.ApplicationReadyEvent;
 
 import java.io.IOException;
@@ -34,8 +36,14 @@ public class TranslatorMainPageLoader {
             Scene scene = new Scene(root, 1200, 800);
 
             Stage stage = event.getStage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Переводчик");
             stage.setScene(scene);
+            stage.setResizable(true);
+
+            TranslatorMainPageController controller = loader.getController();
+            controller.stageInit(stage);
+
             stage.show();
         } catch (IOException e) {
             log.error("Fail to create Translator screen!", e);

@@ -4,16 +4,23 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import sarinxo.desctop.translator.ResizeHelper;
 import sarinxo.desctop.translator.dto.LanguageCode;
 import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
+import sarinxo.desctop.translator.service.TranslatorService;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +31,19 @@ public class TranslatorMainPageController {
 
     @Setter(onMethod_ = @Autowired)
     private TranslatorService translatorService;
+
+    @FXML
+    private BorderPane root;
+    @FXML
+    private HBox titleBar;
+    @FXML
+    private Button minimizeButton;
+    @FXML
+    private Button fullscreenButton;
+    @FXML
+    private Button closeButton;
+    private double dragOffsetX;
+    private double dragOffsetY;
 
     @FXML
     private ComboBox<LanguageCode> sourceLang;
@@ -43,9 +63,7 @@ public class TranslatorMainPageController {
         log.info("FXML controller initialized");
 
         ObservableList<LanguageCode> langs = FXCollections.observableArrayList(LanguageCode.values());
-
         sourceLang.setItems(langs);
-
         targetLang.setItems(langs.filtered(lang -> lang != LanguageCode.AUTO));
 
         sourceLang.getSelectionModel().select(LanguageCode.AUTO);
@@ -54,8 +72,30 @@ public class TranslatorMainPageController {
         translateButton.setOnAction(event -> onTranslate());
     }
 
+    public void stageInit(Stage stage) {
+        minimizeButton.setOnAction(e -> stage.setIconified(true));
+        fullscreenButton.setOnAction(e -> stage.setFullScreen(!stage.isFullScreen()));
+        closeButton.setOnAction(e -> stage.close());
+
+        ResizeHelper.addResizeListener(stage, 6);
+
+        titleBar.setOnMousePressed(event -> {
+            dragOffsetX = stage.getX() - event.getScreenX();
+            dragOffsetY = stage.getY() - event.getScreenY();
+        });
+        titleBar.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() + dragOffsetX);
+            stage.setY(event.getScreenY() + dragOffsetY);
+        });
+
+    }
+
     private void onTranslate() {
         String textToTranslate = inputTextArea.getText();
+        if (Strings.isBlank(textToTranslate)) {
+            return;
+        }
+
         String fromLanguageCode = sourceLang.getSelectionModel().getSelectedItem().getCode();
         String toLanguageCode = targetLang.getSelectionModel().getSelectedItem().getCode();
 

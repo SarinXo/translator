@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.view.translator;
+package sarinxo.desctop.translator.service;
 
 import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
 
