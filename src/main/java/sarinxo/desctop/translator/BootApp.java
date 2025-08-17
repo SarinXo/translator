@@ -22,7 +22,6 @@ public class BootApp extends Application {
 
         log.info("Start to launch interface");
         launch(args);
-        log.info("Interface was successfully load");
     }
 
     /**
