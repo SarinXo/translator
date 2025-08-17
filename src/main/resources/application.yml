@@ -3,7 +3,10 @@ spring:
     name: translator
 
 translator:
-  api:
-    yandex:
-      enabled: true
-      key: ${YANDEX_TRANSLATOR_API_KEY}
+  google:
+    enabled: true
+    url: https://translate.google.com
+    api:
+      translate: /translate_a/single?client=at&dt=t&dj=1
+
+

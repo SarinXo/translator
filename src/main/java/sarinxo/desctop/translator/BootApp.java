@@ -27,12 +27,10 @@ public class BootApp extends Application {
 
     /**
      * Запуск UI
-     * @param stage
-     * @throws Exception
      */
     @Override
     public void start(Stage stage) {
-        ApplicationReadyEvent event = new ApplicationReadyEvent(this, stage);
+        ApplicationReadyEvent event = new ApplicationReadyEvent(stage);
 
         context.publishEvent(event);
     }
