@@ -37,19 +37,25 @@ public class TrayLoader {
                 stage.requestFocus();
             }));
 
-            MenuItem exitItem = new MenuItem("Выйти");
-            exitItem.addActionListener(it -> Platform.exit());
+            SystemTray tray = SystemTray.getSystemTray();
 
             PopupMenu popupMenu = new PopupMenu();
             popupMenu.add(showItem);
-            popupMenu.add(exitItem);
+
             URL imageURL = TrayLoader.class.getResource("/assets/icons/clown.png");
             Image image = ImageIO.read(imageURL);
             TrayIcon trayIcon = new TrayIcon(image, "Переводчик", popupMenu);
             trayIcon.setImageAutoSize(true);
-            SystemTray systemTray = SystemTray.getSystemTray();
+            tray.add(trayIcon);
 
-            systemTray.add(trayIcon);
+            MenuItem exitItem = new MenuItem("Выйти");
+            exitItem.addActionListener(it -> {
+                Platform.exit();
+                tray.remove(trayIcon);
+            });
+
+            popupMenu.add(exitItem);
+
             stage.initStyle(StageStyle.UNDECORATED);
         } catch (AWTException | IOException e) {
             log.error("Не удалось добавить иконку в системный трей.", e);
