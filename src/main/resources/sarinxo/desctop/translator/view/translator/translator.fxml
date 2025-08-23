@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="sarinxo.desctop.translator.view.translator.TranslatorAppMainPage">
-    <Label fx:id="helloLabel" text="Нажми кнопку"/>
-    <Button text="Сказать привет" onAction="#onButtonClick"/>
-</VBox>
+<BorderPane fx:id="root"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sarinxo.desctop.translator.view.translator.TranslatorMainPageController"
+            stylesheets="@translator.css">
+
+    <!-- Верхняя панель с кнопками управления -->
+    <top>
+        <HBox fx:id="titleBar" styleClass="top-pane" alignment="CENTER_RIGHT" spacing="5">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="minimizeButton" text="_" styleClass="window-btn"/>
+            <Button fx:id="fullscreenButton" text="⬜" styleClass="window-btn"/>
+            <Button fx:id="closeButton" text="✕" styleClass="window-btn-close"/>
+        </HBox>
+    </top>
+
+    <!-- Центральная часть: два текстовых окна -->
+    <center>
+        <HBox spacing="20" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets right="15" left="15"/>
+            </padding>
+
+            <!-- Левая часть -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                <Label text="С языка:"/>
+                <ComboBox fx:id="sourceLang" prefWidth="200"/>
+                <TextArea fx:id="inputTextArea" wrapText="true" promptText="Введите текст для перевода"
+                          VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- Правая часть -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                <Label text="На язык:"/>
+                <ComboBox fx:id="targetLang" prefWidth="200"/>
+                <StackPane VBox.vgrow="ALWAYS">
+                    <TextArea fx:id="outputTextArea" wrapText="true" editable="false"
+                              promptText="Здесь будет перевод"
+                              VBox.vgrow="ALWAYS"/>
+                    <ProgressIndicator fx:id="progressIndicator" visible="false"/>
+                </StackPane>
+            </VBox>
+        </HBox>
+    </center>
+
+    <!-- Нижняя панель: кнопка Перевести -->
+    <bottom>
+        <HBox alignment="CENTER">
+            <Button fx:id="translateButton" text="Перевести" prefWidth="150"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
+
+

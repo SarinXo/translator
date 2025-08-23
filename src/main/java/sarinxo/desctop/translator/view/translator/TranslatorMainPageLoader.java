@@ -1,13 +1,16 @@
 package sarinxo.desctop.translator.view.translator;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import sarinxo.desctop.translator.ResizeHelper;
 import sarinxo.desctop.translator.event.ApplicationReadyEvent;
 
 import java.io.IOException;
@@ -15,28 +18,37 @@ import java.net.URL;
 
 @Slf4j
 @Component
-public class TranslatorAppMainPage implements ApplicationListener<ApplicationReadyEvent> {
+@RequiredArgsConstructor
+public class TranslatorMainPageLoader {
 
-    @Override
+    private final ApplicationContext ctxt;
+
+    @EventListener
     public void onApplicationEvent(ApplicationReadyEvent event) {
         try {
-            log.info("Create Translator screen");
+            log.info("Create TranslatorMainPage screen");
             URL screen = getClass().getResource("translator.fxml");
-            Parent root = FXMLLoader.load(screen);
-            Scene scene = new Scene(root, 1200, 800);
+
+            FXMLLoader loader = new FXMLLoader(screen);
+            loader.setControllerFactory(ctxt::getBean);
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 400);
 
             Stage stage = event.getStage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Переводчик");
             stage.setScene(scene);
+            stage.setResizable(true);
+
+            TranslatorMainPageController controller = loader.getController();
+            controller.stageInit(stage);
+
             stage.show();
         } catch (IOException e) {
             log.error("Fail to create Translator screen!", e);
             throw new RuntimeException(e);
         }
-    }
-
-    public void onButtonClick(ActionEvent actionEvent) {
-        System.out.printf("onButtonClick(%s)\n", actionEvent);
     }
 
 }
