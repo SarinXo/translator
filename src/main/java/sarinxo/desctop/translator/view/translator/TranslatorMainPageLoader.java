@@ -33,7 +33,7 @@ public class TranslatorMainPageLoader {
             loader.setControllerFactory(ctxt::getBean);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 1200, 800);
+            Scene scene = new Scene(root, 600, 400);
 
             Stage stage = event.getStage();
             stage.initStyle(StageStyle.UNDECORATED);

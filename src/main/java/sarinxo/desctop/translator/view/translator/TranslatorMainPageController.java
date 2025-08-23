@@ -33,8 +33,6 @@ public class TranslatorMainPageController {
     private TranslatorService translatorService;
 
     @FXML
-    private BorderPane root;
-    @FXML
     private HBox titleBar;
     @FXML
     private Button minimizeButton;
@@ -78,6 +76,8 @@ public class TranslatorMainPageController {
         closeButton.setOnAction(e -> stage.close());
 
         ResizeHelper.addResizeListener(stage, 6);
+
+        titleBar.setFillHeight(true);
 
         titleBar.setOnMousePressed(event -> {
             dragOffsetX = stage.getX() - event.getScreenX();
