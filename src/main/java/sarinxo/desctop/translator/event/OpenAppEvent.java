@@ -4,11 +4,11 @@ import javafx.stage.Stage;
 import lombok.Getter;
 
 @Getter
-public class ApplicationReadyEvent {
+public class OpenAppEvent {
 
     private final Stage stage;
 
-    public ApplicationReadyEvent(Stage stage) {
+    public OpenAppEvent(Stage stage) {
         this.stage = stage;
     }
 

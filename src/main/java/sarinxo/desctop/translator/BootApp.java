@@ -7,7 +7,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import sarinxo.desctop.translator.event.ApplicationReadyEvent;
+import sarinxo.desctop.translator.event.OpenAppEvent;
 
 @Slf4j
 @SpringBootApplication
@@ -29,7 +29,7 @@ public class BootApp extends Application {
      */
     @Override
     public void start(Stage stage) {
-        ApplicationReadyEvent event = new ApplicationReadyEvent(stage);
+        OpenAppEvent event = new OpenAppEvent(stage);
 
         context.publishEvent(event);
     }

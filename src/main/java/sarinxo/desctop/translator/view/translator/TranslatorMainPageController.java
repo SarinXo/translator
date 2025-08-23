@@ -21,6 +21,7 @@ import sarinxo.desctop.translator.ResizeHelper;
 import sarinxo.desctop.translator.dto.LanguageCode;
 import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
 import sarinxo.desctop.translator.service.TranslatorService;
+import sarinxo.desctop.translator.view.systemtray.TrayLoader;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -73,7 +74,7 @@ public class TranslatorMainPageController {
     public void stageInit(Stage stage) {
         minimizeButton.setOnAction(e -> stage.setIconified(true));
         fullscreenButton.setOnAction(e -> stage.setFullScreen(!stage.isFullScreen()));
-        closeButton.setOnAction(e -> stage.close());
+        closeButton.setOnAction(e -> stage.hide());
 
         ResizeHelper.addResizeListener(stage, 6);
 
@@ -87,6 +88,7 @@ public class TranslatorMainPageController {
             stage.setX(event.getScreenX() + dragOffsetX);
             stage.setY(event.getScreenY() + dragOffsetY);
         });
+        TrayLoader.init(stage);
 
     }
 

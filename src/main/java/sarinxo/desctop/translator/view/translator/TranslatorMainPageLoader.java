@@ -10,8 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import sarinxo.desctop.translator.ResizeHelper;
-import sarinxo.desctop.translator.event.ApplicationReadyEvent;
+import sarinxo.desctop.translator.event.OpenAppEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +23,7 @@ public class TranslatorMainPageLoader {
     private final ApplicationContext ctxt;
 
     @EventListener
-    public void onApplicationEvent(ApplicationReadyEvent event) {
+    public void onApplicationEvent(OpenAppEvent event) {
         try {
             log.info("Create TranslatorMainPage screen");
             URL screen = getClass().getResource("translator.fxml");
@@ -37,7 +36,7 @@ public class TranslatorMainPageLoader {
 
             Stage stage = event.getStage();
             stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Переводчик");
+            stage.setTitle("Translator");
             stage.setScene(scene);
             stage.setResizable(true);
 
