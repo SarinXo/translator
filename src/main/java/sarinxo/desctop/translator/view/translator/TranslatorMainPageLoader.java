@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import sarinxo.desctop.translator.event.OpenAppEvent;
+import sarinxo.desctop.translator.handler.keyboard.KeystrokeHandler;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,6 +45,7 @@ public class TranslatorMainPageLoader {
             controller.stageInit(stage);
 
             stage.show();
+            KeystrokeHandler.init();
         } catch (IOException e) {
             log.error("Fail to create Translator screen!", e);
             throw new RuntimeException(e);
