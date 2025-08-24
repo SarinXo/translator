@@ -15,7 +15,7 @@ public class HotkeyListener implements NativeKeyListener {
         history.addKey(e.getKeyCode());
         int[] keys = history.getKeys();
         if (keys[0] == NativeKeyEvent.VC_CONTROL
-                && keys[1] == NativeKeyEvent.VC_Zz
+                && keys[1] == NativeKeyEvent.VC_Z
                 && keys[2] == NativeKeyEvent.VC_Z) {
             log.info("YES!");
         }

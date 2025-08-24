@@ -32,7 +32,7 @@ public class KeyHistory {
     public int[] getKeys() {
         int[] orderedKeys = new int[capacity];
         byte currentKey = pos;
-        for(byte i = (byte)(capacity - 1); i > 0; i--) {
+        for(byte i = (byte)(capacity - 1); i >= 0; i--) {
             orderedKeys[i] = keys[currentKey];
             if(currentKey == 0) {
                 currentKey = (byte) (capacity - 1);
