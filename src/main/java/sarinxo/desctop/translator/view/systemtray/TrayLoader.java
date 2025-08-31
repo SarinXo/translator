@@ -52,6 +52,7 @@ public class TrayLoader {
             exitItem.addActionListener(it -> {
                 Platform.exit();
                 tray.remove(trayIcon);
+                System.exit(0);
             });
 
             popupMenu.add(exitItem);

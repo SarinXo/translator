@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'checkstyle'
     id 'org.springframework.boot' version '3.2.5'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'io.spring.dependency-management' version '1.1.7'
 }
@@ -60,8 +61,8 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
 
-    //Захват клавишь для действий
-    implementation 'com.github.kwhat:jnativehook:2.2.2'
+    //Захват клавиш для действий
+    implementation "com.github.kwhat:jnativehook:${jnativehookVersion}"
 
     //Отказоустойчивость запросов
     implementation "io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}"
@@ -82,3 +83,17 @@ tasks.withType(JavaCompile).configureEach {
 test {
     useJUnitPlatform()
 }
+
+shadowJar {
+    archiveBaseName.set('Clown-translator')
+    archiveVersion.set('1.0')
+    archiveClassifier.set('')
+}
+
+jar {
+    enabled = true
+    manifest { attributes('Main-Class': 'sarinxo.desctop.translator.BootApp') }
+}
+
+
+

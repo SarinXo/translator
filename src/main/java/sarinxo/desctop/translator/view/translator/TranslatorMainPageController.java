@@ -24,6 +24,7 @@ import sarinxo.desctop.translator.service.TranslatorService;
 import sarinxo.desctop.translator.view.systemtray.TrayLoader;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Exchanger;
 
 @Slf4j
 @Setter
@@ -57,6 +58,7 @@ public class TranslatorMainPageController {
     @FXML
     private Button translateButton;
 
+    //todo отреафкторить и переместить классы
     @FXML
     public void initialize() {
         log.info("FXML controller initialized");
@@ -107,7 +109,7 @@ public class TranslatorMainPageController {
         outputTextArea.clear();
 
         CompletableFuture<String> translatedResponse = translatorService.translate(request);
-
+        //todo сделать обработку ошибок
         translatedResponse.thenAccept(result ->
                 Platform.runLater(() -> {
                     outputTextArea.setText(result);

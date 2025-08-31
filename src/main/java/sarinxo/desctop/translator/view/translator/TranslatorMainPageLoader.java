@@ -3,6 +3,7 @@ package sarinxo.desctop.translator.view.translator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import sarinxo.desctop.translator.event.OpenAppEvent;
-import sarinxo.desctop.translator.handler.keyboard.KeystrokeHandler;
+import sarinxo.desctop.translator.handler.keyboard.KeystrokeOpenHandler;
+import sarinxo.desctop.translator.view.systemtray.TrayLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +38,7 @@ public class TranslatorMainPageLoader {
             Scene scene = new Scene(root, 600, 400);
 
             Stage stage = event.getStage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/assets/icons/clown.png")));
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Translator");
             stage.setScene(scene);
@@ -45,7 +48,7 @@ public class TranslatorMainPageLoader {
             controller.stageInit(stage);
 
             stage.show();
-            KeystrokeHandler.init();
+            KeystrokeOpenHandler.init(stage);
         } catch (IOException e) {
             log.error("Fail to create Translator screen!", e);
             throw new RuntimeException(e);
