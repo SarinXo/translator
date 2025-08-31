@@ -84,16 +84,3 @@ test {
     useJUnitPlatform()
 }
 
-shadowJar {
-    archiveBaseName.set('Clown-translator')
-    archiveVersion.set('1.0')
-    archiveClassifier.set('')
-}
-
-jar {
-    enabled = true
-    manifest { attributes('Main-Class': 'sarinxo.desctop.translator.BootApp') }
-}
-
-
-

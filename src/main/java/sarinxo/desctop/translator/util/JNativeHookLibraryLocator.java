@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 
+/**
+ * Загрузчик нативных библиотек для
+ */
 public class JNativeHookLibraryLocator implements NativeLibraryLocator {
 
     @Override
