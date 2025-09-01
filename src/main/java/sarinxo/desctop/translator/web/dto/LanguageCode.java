@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.dto;
+package sarinxo.desctop.translator.web.dto;
 
 import lombok.Getter;
 

@@ -7,7 +7,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import sarinxo.desctop.translator.event.OpenAppEvent;
+import sarinxo.desctop.translator.view.event.OpenAppEvent;
 
 @Slf4j
 @SpringBootApplication

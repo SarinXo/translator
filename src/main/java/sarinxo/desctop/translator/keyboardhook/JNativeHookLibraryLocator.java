@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.util;
+package sarinxo.desctop.translator.keyboardhook;
 
 import com.github.kwhat.jnativehook.NativeLibraryLocator;
 
@@ -14,10 +14,15 @@ import java.util.Iterator;
 import java.util.Locale;
 
 /**
- * Загрузчик нативных библиотек для
+ * Загрузчик нативных библиотек для сборки приложения
  */
 public class JNativeHookLibraryLocator implements NativeLibraryLocator {
 
+    /**
+     * Определяет путь для нативной библиотеки
+     * <p>
+     * P.S. Валидно для версии библиотеки com.github.kwhat:jnativehook:2.2.2
+     */
     @Override
     public Iterator<File> getLibraries() {
         String os = detectOs();
@@ -26,8 +31,8 @@ public class JNativeHookLibraryLocator implements NativeLibraryLocator {
         String base = "/com/github/kwhat/jnativehook/lib/" + os + "/" + arch + "/";
         String lib = switch (os) {
             case "windows" -> "JNativeHook.dll";
-            case "linux"   -> "libJNativeHook.so";
-            default        -> "libJNativeHook.dylib";
+            case "linux" -> "libJNativeHook.so";
+            default -> "libJNativeHook.dylib";
         };
         String path = base + lib;
 
@@ -45,7 +50,7 @@ public class JNativeHookLibraryLocator implements NativeLibraryLocator {
         }
     }
 
-    private static String detectOs() {
+    private String detectOs() {
         String os = System.getProperty("os.name").toLowerCase(Locale.ROOT);
         String prefix = os.length() >= 3 ? os.substring(0, 3) : os;
 
@@ -57,7 +62,7 @@ public class JNativeHookLibraryLocator implements NativeLibraryLocator {
         };
     }
 
-    private static String detectArch() {
+    private String detectArch() {
         String arch = System.getProperty("os.arch")
                 .toLowerCase(Locale.ROOT)
                 .replace("amd", "x");

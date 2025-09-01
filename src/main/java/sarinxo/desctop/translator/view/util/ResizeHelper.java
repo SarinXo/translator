@@ -15,7 +15,8 @@ import static javafx.scene.Cursor.W_RESIZE;
 
 public class ResizeHelper {
 
-    private ResizeHelper() {}
+    private ResizeHelper() {
+    }
 
     public static void addResizeListener(Stage stage, int margin) {
         Scene scene = stage.getScene();
@@ -25,20 +26,20 @@ public class ResizeHelper {
             double x = e.getSceneX(), y = e.getSceneY();
             double w = scene.getWidth(), h = scene.getHeight();
 
-            boolean left   = x <= margin;
-            boolean right  = x >= w - margin;
-            boolean top    = y <= margin;
+            boolean left = x <= margin;
+            boolean right = x >= w - margin;
+            boolean top = y <= margin;
             boolean bottom = y >= h - margin;
 
-            if (left && top)            scene.setCursor(NW_RESIZE);
-            else if (right && top)      scene.setCursor(NE_RESIZE);
-            else if (left && bottom)    scene.setCursor(SW_RESIZE);
-            else if (right && bottom)   scene.setCursor(SE_RESIZE);
-            else if (right)             scene.setCursor(E_RESIZE);
-            else if (left)              scene.setCursor(W_RESIZE);
-            else if (top)               scene.setCursor(N_RESIZE);
-            else if (bottom)            scene.setCursor(S_RESIZE);
-            else                        scene.setCursor(Cursor.DEFAULT);
+            if (left && top) scene.setCursor(NW_RESIZE);
+            else if (right && top) scene.setCursor(NE_RESIZE);
+            else if (left && bottom) scene.setCursor(SW_RESIZE);
+            else if (right && bottom) scene.setCursor(SE_RESIZE);
+            else if (right) scene.setCursor(E_RESIZE);
+            else if (left) scene.setCursor(W_RESIZE);
+            else if (top) scene.setCursor(N_RESIZE);
+            else if (bottom) scene.setCursor(S_RESIZE);
+            else scene.setCursor(Cursor.DEFAULT);
         });
 
         scene.setOnMousePressed(e -> {

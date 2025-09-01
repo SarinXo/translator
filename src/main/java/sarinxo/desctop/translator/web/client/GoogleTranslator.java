@@ -1,13 +1,13 @@
-package sarinxo.desctop.translator.client;
+package sarinxo.desctop.translator.web.client;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import sarinxo.desctop.translator.config.property.GoogleProperties;
-import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
-import sarinxo.desctop.translator.dto.TranslateGoogleResponse;
+import sarinxo.desctop.translator.web.config.property.GoogleProperties;
+import sarinxo.desctop.translator.web.dto.TranslateGoogleRequest;
+import sarinxo.desctop.translator.web.dto.TranslateGoogleResponse;
 
 import java.util.Optional;
 

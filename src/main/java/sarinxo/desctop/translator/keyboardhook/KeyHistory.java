@@ -1,7 +1,10 @@
-package sarinxo.desctop.translator.handler.keyboard;
+package sarinxo.desctop.translator.keyboardhook;
 
 import java.util.Arrays;
 
+/**
+ * Класс, который должен хранить 3 последних символа использованные пользователем. Порядок от последнего к первому.
+ */
 public class KeyHistory {
 
     private final int[] keys;
@@ -9,9 +12,9 @@ public class KeyHistory {
     private byte pos;
 
     public KeyHistory(byte capacity) {
-        if( capacity <= 0 ) {
+        if (capacity <= 0) {
             throw new IllegalArgumentException("capacity < 0");
-        } else if( capacity > 4 ) {
+        } else if (capacity > 4) {
             throw new IllegalArgumentException("capacity > 4 (too much)");
         }
         this.capacity = capacity;
@@ -20,6 +23,9 @@ public class KeyHistory {
         pos = (byte) 0;
     }
 
+    /**
+     * Вычисляет позицию для вставки и вставляет код клавиши
+     */
     public void addKey(int key) {
         if (pos < capacity - 1) {
             pos++;
@@ -29,12 +35,15 @@ public class KeyHistory {
         keys[pos] = key;
     }
 
+    /**
+     * Возвращает массив из кодов клавиш от нажатой первой до нажатой последней
+     */
     public int[] getKeys() {
         int[] orderedKeys = new int[capacity];
         byte currentKey = pos;
-        for(byte i = (byte)(capacity - 1); i >= 0; i--) {
+        for (byte i = (byte) (capacity - 1); i >= 0; i--) {
             orderedKeys[i] = keys[currentKey];
-            if(currentKey == 0) {
+            if (currentKey == 0) {
                 currentKey = (byte) (capacity - 1);
             } else
                 currentKey--;

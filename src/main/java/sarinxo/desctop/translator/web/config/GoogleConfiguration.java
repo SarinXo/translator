@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.config.google;
+package sarinxo.desctop.translator.web.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import sarinxo.desctop.translator.client.GoogleApiClient;
-import sarinxo.desctop.translator.client.GoogleTranslator;
-import sarinxo.desctop.translator.config.property.GoogleProperties;
+import sarinxo.desctop.translator.web.client.GoogleApiClient;
+import sarinxo.desctop.translator.web.client.GoogleTranslator;
+import sarinxo.desctop.translator.web.config.property.GoogleProperties;
 
 import java.time.Duration;
 

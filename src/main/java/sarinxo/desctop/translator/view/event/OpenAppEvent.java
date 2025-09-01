@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.event;
+package sarinxo.desctop.translator.view.event;
 
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -10,12 +10,11 @@ import java.util.concurrent.Executors;
 public class OpenAppEvent {
 
     private final Stage stage;
+    ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public OpenAppEvent(Stage stage) {
         this.stage = stage;
     }
-
-    ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public void shutdown() {
         executor.shutdown();

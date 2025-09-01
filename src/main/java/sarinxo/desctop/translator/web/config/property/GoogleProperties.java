@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.config.property;
+package sarinxo.desctop.translator.web.config.property;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

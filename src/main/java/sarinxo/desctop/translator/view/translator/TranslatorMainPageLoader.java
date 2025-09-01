@@ -11,9 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import sarinxo.desctop.translator.event.OpenAppEvent;
-import sarinxo.desctop.translator.handler.keyboard.KeystrokeOpenHandler;
-import sarinxo.desctop.translator.view.systemtray.TrayLoader;
+import sarinxo.desctop.translator.keyboardhook.KeystrokeOpenHandler;
+import sarinxo.desctop.translator.view.event.OpenAppEvent;
 
 import java.io.IOException;
 import java.net.URL;

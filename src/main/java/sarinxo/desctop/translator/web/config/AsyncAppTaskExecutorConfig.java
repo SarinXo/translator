@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.config;
+package sarinxo.desctop.translator.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

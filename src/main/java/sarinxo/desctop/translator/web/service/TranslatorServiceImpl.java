@@ -1,12 +1,12 @@
-package sarinxo.desctop.translator.service;
+package sarinxo.desctop.translator.web.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import sarinxo.desctop.translator.client.GoogleApiClient;
-import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
-import sarinxo.desctop.translator.dto.TranslateGoogleResponse;
+import sarinxo.desctop.translator.web.client.GoogleApiClient;
+import sarinxo.desctop.translator.web.dto.TranslateGoogleRequest;
+import sarinxo.desctop.translator.web.dto.TranslateGoogleResponse;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @ConditionalOnProperty("translator.google.enabled")
-public class TranslatorServiceImpl implements TranslatorService{
+public class TranslatorServiceImpl implements TranslatorService {
 
     private final ExecutorService asyncAppTaskExecutor;
     private final GoogleApiClient googleApiClient;
@@ -35,7 +35,7 @@ public class TranslatorServiceImpl implements TranslatorService{
 
                     } catch (Exception e) {
                         log.warn(e.getMessage());
-                        return "Возникла ошибка! " +  e.getMessage();
+                        return "Возникла ошибка! " + e.getMessage();
                     }
                 },
                 asyncAppTaskExecutor

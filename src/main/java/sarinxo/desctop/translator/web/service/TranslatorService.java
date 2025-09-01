@@ -1,6 +1,6 @@
-package sarinxo.desctop.translator.service;
+package sarinxo.desctop.translator.web.service;
 
-import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
+import sarinxo.desctop.translator.web.dto.TranslateGoogleRequest;
 
 import java.util.concurrent.CompletableFuture;
 

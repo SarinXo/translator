@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator.dto;
+package sarinxo.desctop.translator.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

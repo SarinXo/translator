@@ -15,11 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sarinxo.desctop.translator.view.util.ResizeHelper;
-import sarinxo.desctop.translator.dto.LanguageCode;
-import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
-import sarinxo.desctop.translator.service.TranslatorService;
 import sarinxo.desctop.translator.view.systemtray.TrayLoader;
+import sarinxo.desctop.translator.view.util.ResizeHelper;
+import sarinxo.desctop.translator.web.dto.LanguageCode;
+import sarinxo.desctop.translator.web.dto.TranslateGoogleRequest;
+import sarinxo.desctop.translator.web.service.TranslatorService;
 
 import java.util.concurrent.CompletableFuture;
 
