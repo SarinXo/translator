@@ -1,4 +1,4 @@
-package sarinxo.desctop.translator;
+package sarinxo.desctop.translator.view.util;
 
 import javafx.scene.Cursor;
 import javafx.scene.Scene;

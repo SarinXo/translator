@@ -4,12 +4,10 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import lombok.Setter;
@@ -17,10 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sarinxo.desctop.translator.ResizeHelper;
+import sarinxo.desctop.translator.view.util.ResizeHelper;
 import sarinxo.desctop.translator.dto.LanguageCode;
 import sarinxo.desctop.translator.dto.TranslateGoogleRequest;
 import sarinxo.desctop.translator.service.TranslatorService;
+import sarinxo.desctop.translator.view.systemtray.TrayLoader;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -56,6 +55,7 @@ public class TranslatorMainPageController {
     @FXML
     private Button translateButton;
 
+    //todo отреафкторить и переместить классы
     @FXML
     public void initialize() {
         log.info("FXML controller initialized");
@@ -73,7 +73,7 @@ public class TranslatorMainPageController {
     public void stageInit(Stage stage) {
         minimizeButton.setOnAction(e -> stage.setIconified(true));
         fullscreenButton.setOnAction(e -> stage.setFullScreen(!stage.isFullScreen()));
-        closeButton.setOnAction(e -> stage.close());
+        closeButton.setOnAction(e -> stage.hide());
 
         ResizeHelper.addResizeListener(stage, 6);
 
@@ -87,6 +87,7 @@ public class TranslatorMainPageController {
             stage.setX(event.getScreenX() + dragOffsetX);
             stage.setY(event.getScreenY() + dragOffsetY);
         });
+        TrayLoader.init(stage);
 
     }
 
@@ -105,7 +106,7 @@ public class TranslatorMainPageController {
         outputTextArea.clear();
 
         CompletableFuture<String> translatedResponse = translatorService.translate(request);
-
+        //todo сделать обработку ошибок
         translatedResponse.thenAccept(result ->
                 Platform.runLater(() -> {
                     outputTextArea.setText(result);

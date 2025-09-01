@@ -2,6 +2,10 @@ spring:
   application:
     name: translator
 
+  boot:
+    repackage:
+      exclude: com.github.kwhat:jnativehook
+
 translator:
   google:
     enabled: true
@@ -9,4 +13,6 @@ translator:
     api:
       translate: /translate_a/single?client=at&dt=t&dj=1
 
-
+logging:
+  level:
+    org.jnativehook.GlobalScreen: ERROR
